@@ -1,0 +1,84 @@
+// The function NonADE takes a ring R and a homogeneous polynomial in three variables f 
+// of even degree d, and it returns the non-ADE singular points of the projective 
+// surface S defined as the double cover of IP^2 ramified above the curve defined by f.
+//
+// 
+
+
+function NonADE(R,f)
+
+A:=BaseRing(R);
+d:=Degree(f);
+dd:=Numerator(d/2);
+PP<x,y,z,w>:=WeightedProjectiveSpace(A,[1,1,1,dd]);
+
+ff:=w^2-Evaluate(f,[x,y,z]);
+S:=Surface(PP,ff);
+SingS:=SingularSubscheme(S);
+if Dimension(SingS) gt 0 then
+  "The surface has non isolated singularities";
+  return(0);
+end if;
+
+SP:=[];
+
+Sx:=AffinePatch(S,4);
+SxSP:=SingularPoints(Sx);
+for P in SxSP do
+  if not IsSimpleSurfaceSingularity(P) then
+    Append(~SP,S!P);
+  end if;
+end for;
+
+
+
+Sy:=AffinePatch(S,3);
+SySP:=SingularPoints(Sy);
+for P in SySP do
+  if not IsSimpleSurfaceSingularity(P) then
+    Append(~SP,S!P);
+  end if;
+end for;
+
+Sz:=AffinePatch(S,2);
+SzSP:=SingularPoints(Sz);
+for P in SzSP do
+   if not IsSimpleSurfaceSingularity(P) then
+    Append(~SP,S!P);
+  end if;
+end for;
+
+if #SP gt 0 then
+  return SP;
+else
+  return SP;
+end if;
+
+end function;  
+
+
+
+
+
+
+
+// Example 1 and 2
+QQ:=Rationals();
+R<x,y,z>:=PolynomialRing(QQ,3);
+G0:=(x^2+y^2)*z-2*x*y*(x+y)+(2*x-z)*(2*y-z)*z;
+G1:=(x^2+y^2)*z-2*x*y*(x+y);
+G:=G0*G1;
+NonADE(R,G);
+
+S:=z^4-x^2*y^2; T:=(z^2-x^2)*(z^2-y^2);
+f1:=(S+3*T);
+f2:=(S+2*T);
+f:=f1*f2;
+NonADE(R,f);
+
+//Example 3
+QQ:=Rationals();
+R<a,b,c>:=PolynomialRing(QQ,3);
+f:=a*(4*b*(b+a)-a*c)*(a^2*(c-4*b)+b*c*(b-2*a));
+NonADE(R,f);
+
