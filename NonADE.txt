@@ -1,8 +1,8 @@
-// The function NonADE takes a ring R and a homogeneous polynomial in three variables f 
-// of even degree d, and it returns the non-ADE singular points of the projective 
+// The function NonADE takes a ring R and a homogeneous polynomial in three variables f
+// of even degree d, and it returns the non-ADE singular points of the projective
 // surface S defined as the double cover of IP^2 ramified above the curve defined by f.
 //
-// 
+//
 
 
 function NonADE(R,f)
@@ -55,30 +55,3 @@ else
 end if;
 
 end function;  
-
-
-
-
-
-
-
-// Example 1 and 2
-QQ:=Rationals();
-R<x,y,z>:=PolynomialRing(QQ,3);
-G0:=(x^2+y^2)*z-2*x*y*(x+y)+(2*x-z)*(2*y-z)*z;
-G1:=(x^2+y^2)*z-2*x*y*(x+y);
-G:=G0*G1;
-NonADE(R,G);
-
-S:=z^4-x^2*y^2; T:=(z^2-x^2)*(z^2-y^2);
-f1:=(S+3*T);
-f2:=(S+2*T);
-f:=f1*f2;
-NonADE(R,f);
-
-//Example 3
-QQ:=Rationals();
-R<a,b,c>:=PolynomialRing(QQ,3);
-f:=a*(4*b*(b+a)-a*c)*(a^2*(c-4*b)+b*c*(b-2*a));
-NonADE(R,f);
-
