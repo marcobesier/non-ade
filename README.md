@@ -20,9 +20,9 @@ for the vast majority of cases.
 [MAGMA](http://magma.maths.usyd.edu.au/magma/) has a built-in function to check
 whether all singularities of an affine or projective _surface_ are of ADE
 type, but lacks a similar function for hypersurfaces in weighted projective
-space. The `NonADE`function fills this gap.
+space. The `NonADE` function fills this gap.
 
-## How it works?
+## How it Works
 
 The `NonADE` makes use of the fact that
 
@@ -31,38 +31,55 @@ The `NonADE` makes use of the fact that
 
 2. if _p_ is a singularity of the double cover and _q_ is the corresponding
    singularity of the branch locus, then _p_ and _q_ have the same singularity
-   type. For example, if _q_ is a simple curve singularity of type A1, then
-   _p_ is a simple surface singularity of type A1 and vice versa.
+   type. For example, if _q_ is a simple curve singularity of type _A1_, then
+   _p_ is a simple surface singularity of type _A1_ and vice versa.
 
+`NonADE` works as follows: First, the user provides the defining polynomial
+_F(x,y,z)_ of the projective curve _B_ that defines the branch locus
+\{ _B_ = 0 \} of the double cover.
+Given that (by 1.) all singularities of the double cover are in one-to-one
+correspondence with the singularities of _B_ and given that (by 2.) simple
+singularities of _B_ do not change their type under the double cover
+involution, it suffices to study the singularities of _B_ in order to study the
+singularities of the double cover.
 
-### NOTE TO MYSELF: Continue editing here.
+Unfortunately, [MAGMA](http://magma.maths.usyd.edu.au/magma/) does not have a
+function to check whether or not a given projective curve has only simple
+singularities. There is, however, a function that performs this task for affine
+and projective surfaces, called
+`IsSimpleSurfaceSingularity`.
+While this function can not be applied to hypersurfaces in weighted projective
+space, we _can_ use it on affine surfaces. Notice that
+
+1. to study the singularities of _B_, we can study the singularities of each
+   of its three affine charts.
+
+2. each affine chart of _B_ corresponds to a double cover of the affine plane
+   branched above the respective affine chart of _B_. Each of these double
+   covers can be viewed as a hypersurface in the affine 3-space.
+
+3. We can use `IsSimpleSurfaceSingularity` to study the singularities of each
+   of these three affine surfaces.
+
+4. By the above comments, each simple singularity of one of these three surfaces
+   corresponds to a simple curve singularity of an affine chart of _B_. The
+   singularities of the affine charts of _B_, make up all singularities of _B_.
+   The singularities of _B_, make up all singularities of the double cover.
+
+In other words, we can simply study the singularities of each of the three
+affine surfaces mentioned above using `IsSimpleSurfaceSingularity`, and
+formulate our result in terms of singularities of the original double cover
+associated to our square root.
+
 ## Usage
 
-To use `ClassSing`, simply copy the content of classsing.txt into an open MAGMA session. Once the function is defined, you can use it as follows:
-
-1. Fix the basefield to be the field of rational numbers.
-
-    `QQ:=Rationals();`
-
-2. If some of the singular-point coordinates of the given curve contain irrational numbers, adjoin these irrationalities to the basefield. For example, if a:=sqrt(5) is such an irrationality, you can adjoin it to the basefield via
-
-    `F<a>:=ext<QQ|[Polynomial([-5,0,1])]>;`
-
-3. Define the basering. Notice that the variables have to have the names x, y, and z.
-
-    `K<x,y,z>:=PolynomialRing(F,3);`
-
-4. Enter the defining polynomial of the projective curve. Example:
-
-    `f:=(-y*(4*z*(z+y)-x*y))*(y^2*(x-4*z)+z*x*(z-2*y));`
-
-5. Call the ClassSing function.
-
-    `ClassSing(K,f);`
+For a detailed discussion of how to use `NonADE`, have a look at the Usage.pdf
+file, which is contained in this repository.
 
 ## License
 
-`ClassSing`is released under the [GNU General Public License 3](http://www.gnu.org/licenses/gpl-3.0.html).
+`NonADE`is released under the
+[GNU General Public License 3](http://www.gnu.org/licenses/gpl-3.0.html).
 
 ## Authors
 
