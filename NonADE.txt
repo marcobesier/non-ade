@@ -1,9 +1,8 @@
 // The function NonADE takes a ring R and a homogeneous polynomial in three variables f
-// of even degree d, and it returns the non-ADE singular points of the projective
-// surface S defined as the double cover of IP^2 ramified above the curve defined by f.
-//
-//
-
+// of even degree d with coefficients in R,
+// and it returns the non-ADE singular R-points of the projective
+// surface S  defined as the double cover of IP^2  ramified above the curve defined by f.
+// 
 
 function NonADE(R,f)
 
@@ -54,4 +53,4 @@ else
   return SP;
 end if;
 
-end function;  
+end function;
