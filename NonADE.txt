@@ -1,18 +1,18 @@
-// The function NonADE takes a ring R and a homogeneous polynomial in three variables f
-// of even degree d with coefficients in R,
+// The function NonADE takes a ring R and a homogeneous polynomial in three
+// variables F of even degree d with coefficients in R,
 // and it returns the non-ADE singular R-points of the projective
-// surface S  defined as the double cover of IP^2  ramified above the curve defined by f.
-// 
+// surface S  defined as the double cover of IP^2  ramified above the curve
+// defined by F.
 
-function NonADE(R,f)
+function NonADE(R,F)
 
 A:=BaseRing(R);
-d:=Degree(f);
+d:=Degree(F);
 dd:=Numerator(d/2);
 PP<x,y,z,w>:=WeightedProjectiveSpace(A,[1,1,1,dd]);
 
-ff:=w^2-Evaluate(f,[x,y,z]);
-S:=Surface(PP,ff);
+FF:=w^2-Evaluate(F,[x,y,z]);
+S:=Surface(PP,FF);
 SingS:=SingularSubscheme(S);
 if Dimension(SingS) gt 0 then
   "The surface has non isolated singularities";
