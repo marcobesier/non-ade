@@ -6,21 +6,34 @@
 
 function NonADE(R,F)
 
+// Define base ring.
 A:=BaseRing(R);
+
+// Get the (even) polynomial degree d of F and compute d/2
 d:=Degree(F);
 dd:=Numerator(d/2);
+
+// Define ambient space.
 PP<x,y,z,w>:=WeightedProjectiveSpace(A,[1,1,1,dd]);
 
+// View double cover as hypersurface in weighted projective space.
 FF:=w^2-Evaluate(F,[x,y,z]);
 S:=Surface(PP,FF);
+
+// Compute the singular locus of S.
 SingS:=SingularSubscheme(S);
+
+// Check whether S has non-isolated singularities.
 if Dimension(SingS) gt 0 then
-  "The surface has non isolated singularities";
-  return(0);
+   "The double cover has non-isolated singularities.";
+   "Please ensure that the input polynomial is squarefree."
 end if;
 
+// Define list to store non-simple singular points.
 SP:=[];
 
+// Consider all singular points of the affine patch x=1 of S, and store all
+// non-simple singularities in the list SP.
 Sx:=AffinePatch(S,4);
 SxSP:=SingularPoints(Sx);
 for P in SxSP do
@@ -29,8 +42,8 @@ for P in SxSP do
   end if;
 end for;
 
-
-
+// Consider all singular points of the affine patch y=1 of S, and store all
+// non-simple singularities in the list SP.
 Sy:=AffinePatch(S,3);
 SySP:=SingularPoints(Sy);
 for P in SySP do
@@ -39,6 +52,8 @@ for P in SySP do
   end if;
 end for;
 
+// Consider all singular points of the affine patch z=1 of S, and store all
+// non-simple singularities in the list SP.
 Sz:=AffinePatch(S,2);
 SzSP:=SingularPoints(Sz);
 for P in SzSP do
@@ -47,10 +62,8 @@ for P in SzSP do
   end if;
 end for;
 
-if #SP gt 0 then
-  return SP;
-else
-  return SP;
-end if;
+// Return all non-simple singularities as a list of points or return.
+// If S is smooth or has at most simple singularities, return the empty list.
+return SP;
 
 end function;
