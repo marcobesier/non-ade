@@ -1,20 +1,18 @@
+// First example in HowTo.pdf
+k:=Rationals();
+E<i>:=ext<k|[Polynomial([1,0,1])]>;
+R<x,y,z>:=PolynomialRing(E,3);
+F:=(x+z)*(x-z)*(y+z)*(x+y+z)*(16*x*z+(4*z+y)^2);
+NonADE(R,F);
 
-// Example 1 and 2
-QQ:=Rationals();
-R<x,y,z>:=PolynomialRing(QQ,3);
-G0:=(x^2+y^2)*z-2*x*y*(x+y)+(2*x-z)*(2*y-z)*z;
-G1:=(x^2+y^2)*z-2*x*y*(x+y);
-G:=G0*G1;
-NonADE(R,G);
+// Second example in HowTo.pdf
+k:=Rationals();
+R<x,y,z>:=PolynomialRing(k,3);
+F:=x*(x-4*z)*(-x*y*(4*z*(z+y)-x*y));
+NonADE(R,F);
 
-S:=z^4-x^2*y^2; T:=(z^2-x^2)*(z^2-y^2);
-f1:=(S+3*T);
-f2:=(S+2*T);
-f:=f1*f2;
-NonADE(R,f);
-
-//Example 3
-QQ:=Rationals();
-R<a,b,c>:=PolynomialRing(QQ,3);
-f:=a*(4*b*(b+a)-a*c)*(a^2*(c-4*b)+b*c*(b-2*a));
-NonADE(R,f);
+// Third example in HowTo.pdf
+k:=Rationals();
+R<x,y,z>:=PolynomialRing(k,3);
+F:=(x-4*z)*(-y*(4*z*(z+y)-x*y));
+NonADE(R,F);
