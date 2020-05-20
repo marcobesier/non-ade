@@ -1,12 +1,3 @@
-// Example 2.3
-//THIS DOES NOT WORK YET
-IP2<z, x, w> := ProjectivePlane(Rationals());
-f := 1-X^2;
-d := Degree(f);
-g := z^(d-2)*w^2 - Numerator(z^d*Evaluate(f, x/z));
-Cbar := Curve(IP2, g);
-Genus(Cbar);
-
 
 // Example 1 and 2
 QQ:=Rationals();
