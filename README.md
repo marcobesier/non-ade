@@ -19,9 +19,9 @@ A detailed discussion on how to use `NonADE` can be found in the [HowTo.pdf](htt
 
 ## License
 
-`NonADE`is released under the
+`NonADE` is released under the
 [GNU General Public License 3](http://www.gnu.org/licenses/gpl-3.0.html).
 
-## Authors
+## Contributors
 
 Marco Besier, Dino Festi
