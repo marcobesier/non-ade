@@ -1,18 +1,6 @@
-// First example in HowTo.pdf
+// Magma code for example discussed in HowTo.pdf
 k:=Rationals();
 E<i>:=ext<k|[Polynomial([1,0,1])]>;
 R<x,y,z>:=PolynomialRing(E,3);
 F:=(x+z)*(x-z)*(y+z)*(x+y+z)*(16*x*z+(4*z+y)^2);
-NonADE(R,F);
-
-// Second example in HowTo.pdf
-k:=Rationals();
-R<x,y,z>:=PolynomialRing(k,3);
-F:=x*(x-4*z)*(-x*y*(4*z*(z+y)-x*y));
-NonADE(R,F);
-
-// Third example in HowTo.pdf
-k:=Rationals();
-R<x,y,z>:=PolynomialRing(k,3);
-F:=(x-4*z)*(-y*(4*z*(z+y)-x*y));
 NonADE(R,F);
