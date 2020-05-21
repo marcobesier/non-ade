@@ -7,7 +7,7 @@ It contains the [source code](https://github.com/marcobesier/rationalizability-o
 ## What is `NonADE`?
 `NonADE` is a [Magma](http://magma.maths.usyd.edu.au/magma/) function that returns the
 non-simple (non-ADE) singularities of a double cover of the projective plane.
-In particular, one can use it to show that the associated double cover
+In particular, one can use it to check whether the associated double cover
 of a square root in two variables has at most simple singularities.
 
 ## How to apply `NonADE`?
