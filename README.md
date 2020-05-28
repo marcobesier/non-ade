@@ -24,4 +24,4 @@ A detailed discussion on how to use `NonADE` can be found in the [HowTo.pdf](htt
 
 ## Contributors
 
-Marco Besier, Dino Festi
+[Marco Besier](https://www.marcobesier.com), [Dino Festi](https://www.staff.uni-mainz.de/dfesti/)
