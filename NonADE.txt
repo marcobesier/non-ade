@@ -1,10 +1,15 @@
-// The function NonADE takes a ring R and a homogeneous polynomial in three
+// The function NonADE takes a ring R and a squarefree homogeneous polynomial in three
 // variables F of even degree d with coefficients in R,
 // and it returns the non-ADE singular R-points of the projective
 // surface S  defined as the double cover of IP^2  ramified above the curve
 // defined by F.
 
 function NonADE(R,F)
+
+// Check that the input is in the correct form
+assert IsHomogeneous(F);
+assert IsEven(Degree(F));
+assert SquarefreePart(F) eq F;
 
 // Define base ring.
 A:=BaseRing(R);
@@ -16,6 +21,7 @@ dd:=Numerator(d/2);
 // Define ambient space.
 PP<x,y,z,w>:=WeightedProjectiveSpace(A,[1,1,1,dd]);
 
+
 // View double cover as hypersurface in weighted projective space.
 FF:=w^2-Evaluate(F,[x,y,z]);
 S:=Surface(PP,FF);
@@ -23,11 +29,9 @@ S:=Surface(PP,FF);
 // Compute the singular locus of S.
 SingS:=SingularSubscheme(S);
 
-// Check whether S has non-isolated singularities.
-if Dimension(SingS) gt 0 then
-   "The double cover has non-isolated singularities.";
-   "Please ensure that the input polynomial is squarefree."
-end if;
+// Consistency check: Check that S has no non-isolated singularities.
+// For surfaces, F being squarefree is equivalent to S:={w^2-F=0} having only isolated singularities.
+assert Dimension(SingS) eq 0;
 
 // Define list to store non-simple singular points.
 SP:=[];
@@ -61,6 +65,9 @@ for P in SzSP do
     Append(~SP,S!P);
   end if;
 end for;
+
+// Remove duplicate entries from SP
+SP:=[P : P in Set(SP)];
 
 // Return all non-simple singularities as a list of points or return.
 // If S is smooth or has at most simple singularities, return the empty list.
