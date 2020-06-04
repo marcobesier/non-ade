@@ -1,7 +1,7 @@
-// The function NonADE takes a ring R and a squarefree homogeneous polynomial in three
-// variables F of even degree d with coefficients in R,
+// The function NonADE takes a ring R and a squarefree homogeneous polynomial
+// in three variables F of even degree d with coefficients in R,
 // and it returns the non-ADE singular R-points of the projective
-// surface S  defined as the double cover of IP^2  ramified above the curve
+// surface S defined as the double cover of IP^2 ramified above the curve
 // defined by F.
 
 function NonADE(R,F)
@@ -33,11 +33,11 @@ SingS:=SingularSubscheme(S);
 // For surfaces, F being squarefree is equivalent to S:={w^2-F=0} having only isolated singularities.
 assert Dimension(SingS) eq 0;
 
-// Define list to store non-simple singular points.
+// Define list to store non-ADE singular points.
 SP:=[];
 
 // Consider all singular points of the affine patch x=1 of S, and store all
-// non-simple singularities in the list SP.
+// non-ADE singularities in the list SP.
 Sx:=AffinePatch(S,4);
 SxSP:=SingularPoints(Sx);
 for P in SxSP do
@@ -47,7 +47,7 @@ for P in SxSP do
 end for;
 
 // Consider all singular points of the affine patch y=1 of S, and store all
-// non-simple singularities in the list SP.
+// non-ADE singularities in the list SP.
 Sy:=AffinePatch(S,3);
 SySP:=SingularPoints(Sy);
 for P in SySP do
@@ -57,7 +57,7 @@ for P in SySP do
 end for;
 
 // Consider all singular points of the affine patch z=1 of S, and store all
-// non-simple singularities in the list SP.
+// non-ADE singularities in the list SP.
 Sz:=AffinePatch(S,2);
 SzSP:=SingularPoints(Sz);
 for P in SzSP do
@@ -69,8 +69,8 @@ end for;
 // Remove duplicate entries from SP
 SP:=[P : P in Set(SP)];
 
-// Return all non-simple singularities as a list of points or return.
-// If S is smooth or has at most simple singularities, return the empty list.
+// Return all non-ADE singularities as a list of points or return.
+// If S is smooth or has at most ADE singularities, return the empty list.
 return SP;
 
 end function;
